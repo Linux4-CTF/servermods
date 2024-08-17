@@ -123,12 +123,8 @@ minetest.register_on_leaveplayer(function(player)
 end)
 
 local function join_player(player)
-	local old_join_part = irc.send_join_part
-	if minetest.check_player_privs(player:get_player_name(), { spectate = true }) and irc.send_join_part == true then
+	if minetest.check_player_privs(player:get_player_name(), { spectate = true }) then
 		hide_player(player)
-		irc.send_join_part = false
-
-		minetest.after(0, function() irc.send_join_part = old_join_part end)
 	end
 end
 
